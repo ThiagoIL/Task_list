@@ -1,15 +1,19 @@
-    <div class="container">
+
+
+<div class="container">
+    <h1><center>TI PMP</center> </h1>
+    <form action="/add" method="post">
         <div class="new-task-container">
-            <input type="text" class="new-task-input" placeholder="Tarefa para ser feita..." />
+            <input type="text" class="new-task-input" name="nome" placeholder="Tarefa para ser feita..." />
 
             <button class="new-task-button">Adicionar</button>
         </div>
-  
-        <div class="tasks-container">
-           <p>erererere <i class=" far fa-trash-alt"></i></p>
-           
-        </div>
-        <script src="https://kit.fontawesome.com/f9e19193d6.js" crossorigin="anonymous"></script>
-    </div>
+    </form>
 
-    
+    <div class="tasks-container ">
+        {{#each demandas}}
+            <p>{{dataValues.nome}} <i class="fas fa-edit"></i> <i class="far fa-trash-alt"></i></p> 
+        {{/each}}
+    </div>
+    <script src="https://kit.fontawesome.com/f9e19193d6.js" crossorigin="anonymous"></script>
+</div>
