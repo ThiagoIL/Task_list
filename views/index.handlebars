@@ -1,18 +1,37 @@
+<div class="col-12 col-md-6 centered container_maked" style="padding-top:15px;">
 
+    <div class="tasks-container">
 
-<div class="container">
-    <h1><center>TI PMP</center> </h1>
-    <form action="/add" method="post">
-        <div class="new-task-container">
-            <input type="text" class="new-task-input" name="nome" placeholder="Tarefa para ser feita..." />
+        <h1>
+            <center>DEMANDAS TI</center>
+        </h1>
+        <form action="/add" method="post">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" name="nome" placeholder="Tarefa para ser feita..." />
+                <div class="input-group-prepend">
+                    <button class="new-task-button">Adicionar</button>
+                </div>
 
-            <button class="new-task-button">Adicionar</button>
-        </div>
-    </form>
+            </div>
+        </form>
+    </div>
 
-    <div class="tasks-container ">
+    <div class="tasks-container">
         {{#each demandas}}
-            <p>{{dataValues.nome}} <i class="fas fa-edit"></i> <i class="far fa-trash-alt"></i></p> 
+        <div class="flex-column">
+            <div class="p-2 row border ">
+
+                <div class="p-2 ">
+                    <p>{{dataValues.nome}}</p>
+                </div>
+                <div class="p-2 ml-auto ">
+
+                    <a href="/editar/{{dataValues.id}}"><button class="btn btn-success"> editar</button></a>
+
+                    <a href="/delete/{{dataValues.id}}"><button class="btn btn-danger">apagar</button> </a>
+                </div>
+            </div>
+        </div>
         {{/each}}
     </div>
     <script src="https://kit.fontawesome.com/f9e19193d6.js" crossorigin="anonymous"></script>
