@@ -18,6 +18,10 @@ app.get('/home', function(req, res){
     })
 });
 
+app.get('/', function(req, res){
+    res.redirect('/home')
+})
+
 app.post('/add', function(req, res){
     Demanda.create({
         nome: req.body.nome
