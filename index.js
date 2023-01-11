@@ -54,6 +54,14 @@ app.post('/update', async function(req, res){
     })
 })
 
+app.get('/feito/:id', async function(req, res){
+    const demanda = await Demanda.findByPk(req.params.id)
+    demanda.feito = 1
+    demanda.save().then(function(){
+        res.redirect('/home')
+    })
+})
+
 app.listen(8081, function(){
     console.log("Auto bots lets road!!!")
 })
