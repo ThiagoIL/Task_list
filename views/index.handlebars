@@ -7,7 +7,7 @@
         </h1>
         <form action="/add" method="post">
             <div class="input-group mb-3">
-                <input type="text" class="form-control" name="nome" placeholder="Tarefa para ser feita..." />
+                <input type="text" class="form-control" name="nome" placeholder="Tarefa para ser feita..." required />
                 <div class="input-group-prepend">
                     <button class="new-task-button">Adicionar</button>
                 </div>
@@ -22,13 +22,20 @@
             <div class="p-2 row border ">
 
                 <div class="p-2 ">
-                    <p>{{dataValues.nome}}</p>
+                    {{#if dataValues.feito}}
+                        <s>{{dataValues.nome}}</s>
+                    {{else}}
+                        <p>{{dataValues.nome}}</p>
+                    {{/if}}
                 </div>
                 <div class="p-2 ml-auto ">
+                    {{#if dataValues.feito}}
+                    {{else}}
+                        <a href="/feito/{{dataValues.id}}"><button class="btn btn-primary"> Feito</button></a>
 
-                    <a href="/editar/{{dataValues.id}}"><button class="btn btn-success"> editar</button></a>
-
-                    <a href="/delete/{{dataValues.id}}"><button class="btn btn-danger">apagar</button> </a>
+                        <a href="/editar/{{dataValues.id}}"><button class="btn btn-success"> Editar</button></a>
+                    {{/if}}
+                    <a href="/delete/{{dataValues.id}}"><button class="btn btn-danger">Apagar</button> </a>
                 </div>
             </div>
         </div>

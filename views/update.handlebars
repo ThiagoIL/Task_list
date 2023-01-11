@@ -1,0 +1,21 @@
+
+<div class="col-12 col-md-6 centered container_maked" style="padding-top:15px;">
+
+    <div class="tasks-container">
+
+        <h1>
+            <center>ATUALIZAR TAREFA</center>
+        </h1>
+        <form action="/update" method="post">
+        {{#each oneDemanda}}
+            <div class="input-group mb-3">
+                <input type="hidden" name="id" value="{{dataValues.id}}">
+                <input type="text" class="form-control"  name="nome" value="{{dataValues.nome}}">
+                <div class="input-group-prepend">
+                    <button class="new-task-button btn btn-success">Atualizar</button>
+                </div>
+            </div>
+        {{/each}}
+        </form>
+    </div>
+</div>
