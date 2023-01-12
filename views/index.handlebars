@@ -65,9 +65,10 @@
     </div>
 
 
-
+    {{#if demandas}}
     <div class="tasks-container">
         {{#each demandas}}
+        
         <div class="container">
 
             <!-- Button to Open the Modal -->
@@ -88,11 +89,12 @@
 
                         <!-- Modal body -->
                         <div class="modal-body">
-                            <div class="text-wrap modal-flex">
-                               <p>
-                               {{dataValues.descricao}}
-                               </p>
+                            <div class="text-wrap modal-flex form-outline mb-4">
+                               <label class="form-label" for="textAreaExample6">Descrição</label>
+                               <textarea class="form-control"  id="note" readonly>{{dataValues.descricao}}</textarea>
                             </div>
+
+                            
                         </div>
 
                         <!-- Modal footer -->
@@ -129,5 +131,17 @@
         </div>
         {{/each}}
     </div>
+    {{else}}
+    {{/if}}
+
+    <script>
+        var text = jQuery('#note').val(),
+                // look for any "\n" occurences
+        matches = text.match(/\n/g),
+        breaks = matches ? matches.length : 2;
+
+        jQuery('#note').attr('rows',breaks + 2);
+    </script>
     <script src="https://kit.fontawesome.com/f9e19193d6.js" crossorigin="anonymous"></script>
+
 </div>
