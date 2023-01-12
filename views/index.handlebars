@@ -28,7 +28,7 @@
                                 <div class="modal-body">
                                    <form action="/add" method="post">
                                         <label for="nome">Titulo:</label>
-                                        <input type="text" class="form-control" name="nome">
+                                        <input type="text" class="form-control" name="nome" required>
 
                                         <label for="descricao">Descrição:</label>
                                         <textarea name="descricao" class="form-control" cols="30" rows="10"></textarea>
@@ -89,7 +89,7 @@
                         <!-- Modal body -->
                         <div class="modal-body">
                             <div class="text-wrap modal-flex">
-                               <p class="text-md-left">
+                               <p>
                                {{dataValues.descricao}}
                                </p>
                             </div>

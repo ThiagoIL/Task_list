@@ -24,9 +24,7 @@
 
  .modal-flex{
   word-wrap: break-word;
-  display: grid;
-  grid-template-columns: 100px 100px;
- }
+  }
   
   .new-task-container {
     background-color: #fff;
