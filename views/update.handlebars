@@ -7,15 +7,32 @@
             <center>ATUALIZAR TAREFA</center>
         </h1>
         <form action="/update" method="post">
-        {{#each oneDemanda}}
-            <div class="input-group mb-3">
-                <input type="hidden" name="id" value="{{dataValues.id}}">
-                <input type="text" class="form-control"  name="nome" value="{{dataValues.nome}}">
-                <div class="input-group-prepend">
-                    <button class="new-task-button btn btn-success">Atualizar</button>
+            {{#each oneDemanda}}
+                <div class="container">
+                    
+
+                        <div class="form-group p-2">
+                            <div class="row">
+                                    <input type="hidden" name="id" value="{{dataValues.id}}">
+                                    <label for="nome" class="form-label"><b>Título</b></label>
+                                    <input type="text" class="form-control"  name="nome" value="{{dataValues.nome}}">
+                            </div>
+                        </div>
+
+                        <div class="form-group p-2">
+                            <div class="row">
+                                <label for="descricao"><b>Descrição:</b></label>
+                                <textarea name="descricao" id="descricao" cols="30" rows="10" class="form-control">{{dataValues.descricao}}</textarea>
+                            </div>
+                        </div>
+
+                        <div class="p-2 row " >
+                            <div class="p-2 ml-auto">
+                                <button class="btn btn-success">Atualizar</button>
+                            </div>
+                        </div>  
                 </div>
-            </div>
-        {{/each}}
+            {{/each}}
         </form>
     </div>
 </div>

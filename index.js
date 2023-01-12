@@ -4,18 +4,35 @@ const handlebars = require('express-handlebars');
 const bodyParser = require('body-parser');
 const Demanda = require('./models/Demanda');
 const path = require('path');
+const session = require('express-session');
+const flash = require('connect-flash');
+
+
+// configurações
+
+//session
+app.use(session({
+    secret: "qweqweqweqwe123123123123qweqweqwe123123123",
+    resave: true,
+    saveUninitialized: true
+}));
+app.use(flash());
 
 //path
 app.use(express.static(__dirname + '/views'));
 app.use(express.static(path.join(__dirname,"public")));
-
-
+//handlebars
 app.engine('handlebars', handlebars.engine({defaultLayout: 'main'}))
 app.set('view engine', 'handlebars')
-
+//bodyparser
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
 
+
+
+
+
+//routes
 app.get('/home', function(req, res){
     Demanda.findAll({order: [["id", "DESC"]]}).then(function(demandas){
         res.render('index', {demandas: demandas})
@@ -32,7 +49,8 @@ app.get('/', function(req, res){
 
 app.post('/add', function(req, res){
     Demanda.create({
-        nome: req.body.nome
+        nome: req.body.nome,
+        descricao: req.body.descricao
     }).then(function(){
         res.redirect('/home')
     })
@@ -57,6 +75,7 @@ app.get('/editar/:id', async function (req, res){
 app.post('/update', async function(req, res){
     const demanda = await Demanda.findByPk(req.body.id)
     demanda.nome = req.body.nome
+    demanda.descricao = req.body.descricao
     demanda.save().then(function(){
         res.redirect('/home')
     })

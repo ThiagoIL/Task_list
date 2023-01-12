@@ -6,6 +6,9 @@ const Demanda = db.sequelize.define('demandas', {
     },
     feito: {
         type: db.Sequelize.BOOLEAN            
+    },
+    descricao: {
+        type: db.Sequelize.TEXT('long')
     }
 
 })
