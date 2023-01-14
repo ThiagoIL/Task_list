@@ -5,70 +5,71 @@
         <h1>
             <center>DEMANDAS TI</center>
         </h1>
-        
-            <div class="input-group mb-3 ">
-                <div class="container">
 
-                    <!-- Button to Open the Modal -->
+        <div class="input-group mb-3 ">
+            <div class="container">
+
+                <!-- Button to Open the Modal -->
 
 
-                    <!-- The Modal -->
-                    <div class="modal fade" id="myInsert">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                
+                <!-- The Modal -->
+                <div class="modal fade" id="myInsert">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
 
-                                <!-- Modal Header -->
-                               
-                                <div class="modal-header">
-                                    <h4 class="modal-title ">Adicionar Tarefa</h4>
-                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                </div>
-                                <!-- Modal body -->
-                                <div class="modal-body">
-                                   <form action="/add" method="post">
-                                        <label for="nome">Titulo:</label>
-                                        <input type="text" class="form-control" name="nome" required>
 
-                                        <label for="descricao">Descrição:</label>
-                                        <textarea name="descricao" class="form-control" cols="30" rows="10"></textarea>
+                            <!-- Modal Header -->
 
-                                        <div class="p-2 row " >
-                                            <div class="p-2 ml-auto">
-                                                <button class="btn btn-success" >Adicionar</button>
-                                            </div>
+                            <div class="modal-header">
+                                <h4 class="modal-title ">Adicionar Tarefa</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                            <!-- Modal body -->
+                            <div class="modal-body">
+                                <form action="/add" method="post">
+                                    <label for="nome">Titulo:</label>
+                                    <input type="text" class="form-control" name="nome" required>
+
+                                    <label for="descricao">Descrição:</label>
+                                    <textarea name="descricao" class="form-control" cols="30" rows="10"></textarea>
+
+                                    <div class="p-2 row ">
+                                        <div class="p-2 ml-auto">
+                                            <button class="btn btn-success">Adicionar</button>
                                         </div>
-                                   </form>
-                                </div>
+                                    </div>
+                                </form>
+                            </div>
 
-                                <!-- Modal footer -->
-                                <div class="modal-footer">
-                                    
-                                </div>
+                            <!-- Modal footer -->
+                            <div class="modal-footer">
 
                             </div>
+
                         </div>
                     </div>
-
                 </div>
-                <!-- <input type="text" class="form-control" name="nome" placeholder="Tarefa para ser feita..." required /> -->
-                
-               
 
             </div>
-       
-                    <div class="p-2 row " >
-                        <div class="p-2 ml-auto">
-                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myInsert">Adicionar Tarefa</button>
-                        </div>
-                    </div>    
+            <!-- <input type="text" class="form-control" name="nome" placeholder="Tarefa para ser feita..." required /> -->
+
+
+
+        </div>
+
+        <div class="p-2 row ">
+            <div class="p-2 ml-auto">
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myInsert">Adicionar
+                    Tarefa</button>
+            </div>
+        </div>
     </div>
 
 
     {{#if demandas}}
     <div class="tasks-container">
         {{#each demandas}}
-        
+
         <div class="container">
 
             <!-- Button to Open the Modal -->
@@ -90,11 +91,18 @@
                         <!-- Modal body -->
                         <div class="modal-body">
                             <div class="text-wrap modal-flex form-outline mb-4">
-                               <label class="form-label" for="textAreaExample6">Descrição</label>
-                               <textarea class="form-control"  id="note" readonly>{{dataValues.descricao}}</textarea>
+                                <label class="form-label" for="textAreaExample6">Descrição</label>
+                                <textarea class="form-control" id="note{{dataValues.id}}" readonly>{{dataValues.descricao}}</textarea>
                             </div>
+                            <script>
+                                var text = $("#note"+{{dataValues.id}}).val(),
+                                    // look for any "\n" occurences
+                                    matches = text.match(/\n/g),
+                                    breaks = matches ? matches.length : 2;
+                                $("#note"+{{dataValues.id}}).attr('rows', breaks + 2);
+                            </script>
 
-                            
+
                         </div>
 
                         <!-- Modal footer -->
@@ -118,7 +126,8 @@
                     {{/if}}
                 </div>
                 <div class="p-2 ml-auto ">
-                    <button type="button" class="btn btn btn-warning" data-toggle="modal" data-target="#myModal{{dataValues.id}}">Ver</button>
+                    <button type="button" class="btn btn btn-warning" data-toggle="modal"
+                        data-target="#myModal{{dataValues.id}}">Ver</button>
                     {{#if dataValues.feito}}
                     {{else}}
                     <a href="/feito/{{dataValues.id}}"><button class="btn btn-primary">Feito</button></a>
@@ -134,14 +143,7 @@
     {{else}}
     {{/if}}
 
-    <script>
-        var text = jQuery('#note').val(),
-                // look for any "\n" occurences
-        matches = text.match(/\n/g),
-        breaks = matches ? matches.length : 2;
 
-        jQuery('#note').attr('rows',breaks + 2);
-    </script>
     <script src="https://kit.fontawesome.com/f9e19193d6.js" crossorigin="anonymous"></script>
 
 </div>
