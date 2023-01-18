@@ -25,6 +25,10 @@
  .modal-flex{
   word-wrap: break-word;
   }
+
+  .elastic{
+    white-space: pre-line;
+  }
   
   .new-task-container {
     background-color: #fff;
