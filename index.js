@@ -34,8 +34,13 @@ app.use(bodyParser.json())
 
 //routes
 app.get('/home', function(req, res){
-    Demanda.findAll({order: [["id", "DESC"]]}).then(function(demandas){
+    Demanda.findAll({where: {'feito': null}},{order: [["id", "DESC"]]}).then(function(demandas){
         res.render('index', {demandas: demandas})
+    })
+})
+app.get('/feito', function(req, res){
+    Demanda.findAll({where: {'feito': true}},{order: [["id", "DESC"]]}).then(function(demandas){
+        res.render('done', {demandas: demandas})
     })
 })
 
