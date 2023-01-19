@@ -63,7 +63,7 @@ app.post('/add', function(req, res){
 
 app.get('/delete/:id', function(req, res){
     Demanda.destroy({where: {'id': req.params.id}}).then(function(){
-        res.redirect('/home')
+        res.redirect('back')
 
     }).catch(function(erro){
         res.send('postagem não existe')
