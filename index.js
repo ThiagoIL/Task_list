@@ -33,36 +33,51 @@ app.use(bodyParser.json())
 
 
 //routes
-app.get('/home', function(req, res){
-    Demanda.findAll({where: {'feito': null}, order: [["id", "DESC"]]}).then(function(demandas){
+app.get('/home', async function(req, res){
+    await Demanda.findAll({where: {'prioridade': false, 'feito': null}, order: [["id", "DESC"]]}).then(function(demandas){
         res.render('index', {demandas: demandas})
     })
 })
-app.get('/feito', function(req, res){
-    Demanda.findAll({where: {'feito': true}, order: [["id", "DESC"]]}).then(function(demandas){
+
+app.get('/feito', async function(req, res){
+    await Demanda.findAll({where: {'feito': true}, order: [["id", "DESC"]]}).then(function(demandas){
         res.render('done', {demandas: demandas})
     })
 })
 
-app.get('/', function(req, res){
-    res.redirect('/home')
-})
-
-app.get('/', function(req, res){
-    res.redirect('/home')
-})
-
-app.post('/add', function(req, res){
-    Demanda.create({
-        nome: req.body.nome,
-        descricao: req.body.descricao
-    }).then(function(){
-        res.redirect('/home')
+app.get('/prioridade', async function(req, res){
+    await Demanda.findAll({where: {'prioridade': true, 'feito': null}, order: [["id", "DESC"]]}).then(function(demandas){
+        res.render('priority', {demandas: demandas})
     })
 })
 
-app.get('/delete/:id', function(req, res){
-    Demanda.destroy({where: {'id': req.params.id}}).then(function(){
+app.get('/', function(req, res){
+    res.redirect('/home')
+})
+
+app.get('/', function(req, res){
+    res.redirect('/home')
+})
+
+app.post('/add', async function(req, res){
+    await Demanda.create({
+        nome: req.body.nome,
+        descricao: req.body.descricao,
+        prioridade: req.body.radiocheck
+        
+    }).then(function(){
+        if (req.body.radiocheck == 1){
+            res.redirect('/prioridade')
+        }
+        else{
+            res.redirect('/home')
+        }
+    })
+    
+})
+
+app.get('/delete/:id', async function(req, res){
+    await Demanda.destroy({where: {'id': req.params.id}}).then(function(){
         res.redirect('back')
 
     }).catch(function(erro){
@@ -81,8 +96,14 @@ app.post('/update', async function(req, res){
     const demanda = await Demanda.findByPk(req.body.id)
     demanda.nome = req.body.nome
     demanda.descricao = req.body.descricao
+    demanda.prioridade = req.body.radiocheck
     demanda.save().then(function(){
-        res.redirect('/home')
+        if (req.body.radiocheck == 1){
+            res.redirect('/prioridade')
+        }
+        else{
+            res.redirect('/home')
+        }
     })
 })
 
@@ -90,10 +111,10 @@ app.get('/feito/:id', async function(req, res){
     const demanda = await Demanda.findByPk(req.params.id)
     demanda.feito = 1
     demanda.save().then(function(){
-        res.redirect('/home')
+        res.redirect('back')
     })
 })
 
 app.listen(8081, function(){
-    console.log("Auto bots lets road!!!")
+    console.log("Auto bots lets roll!!!")
 })

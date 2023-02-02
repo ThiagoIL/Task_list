@@ -9,9 +9,12 @@ const Demanda = db.sequelize.define('demandas', {
     },
     descricao: {
         type: db.Sequelize.TEXT('long')
+    },
+    prioridade: {
+        type: db.Sequelize.BOOLEAN
     }
 
 })
 
-//Demanda.sync({force: true})
+// Demanda.sync({force: true})
 module.exports = Demanda; 
